@@ -1,3 +1,5 @@
+#!/usr/bin/env lua
+
 local soldout = require("soldout")
 
 local expect = [[

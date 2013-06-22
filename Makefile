@@ -20,4 +20,7 @@ install: all
 	mkdir -p ${DESTDIR}${PREFIX}/lib/lua/${LUA}
 	cp -f soldout.so ${DESTDIR}${PREFIX}/lib/lua/${LUA}/
 
-.PHONY: all clean install
+test:
+	./test.lua
+
+.PHONY: all clean install test
