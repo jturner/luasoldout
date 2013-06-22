@@ -23,6 +23,7 @@
 
 #include <string.h>
 
+#define INPUT_UNIT 1024
 #define OUTPUT_UNIT 64
 
 static int l_markdown(lua_State *L)
@@ -52,16 +53,16 @@ static int l_markdown(lua_State *L)
 	else
 		prndr = &hrndr;
 
-	ib = bufnew(strlen(mkd) + 1);
+	ib = bufnew(INPUT_UNIT);
 	bufgrow(ib, strlen(mkd) + 1);
 
 	ib->size = strlen(mkd);
-	strcpy(ib->data, mkd);
+	strncpy(ib->data, mkd, ib->size);
 
 	ob = bufnew(OUTPUT_UNIT);
 	markdown(ob, ib, *prndr);
 
-	lua_pushstring(L, ob->data);
+	lua_pushlstring(L, ob->data, ob->size);
 
 	bufrelease(ib);
 	bufrelease(ob);
