@@ -77,7 +77,11 @@ int luaopen_soldout(lua_State *L)
 		{ NULL,		NULL }
 	};
 
-	lua_newtable(L);
-	luaL_setfuncs(L, methods, 0);
+#if defined(LUA_VERSION_NUM) && LUA_VERSION_NUM == 501
+	luaL_register(L, "soldout", methods);
+#else
+	luaL_newlib(L, methods);
+#endif
+
 	return 1;
 }

@@ -26,7 +26,7 @@ with a br tag.</p>
 </blockquote>
 ]]
 
-local result =soldout.markdown([[
+local result = soldout.markdown([[
 A First Level Header
 ====================
 
