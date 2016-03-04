@@ -31,8 +31,9 @@ static int l_markdown(lua_State *L)
 	struct buf *ib, *ob;
 	const struct mkd_renderer *hrndr, *xrndr;
 	const struct mkd_renderer **prndr;
+	size_t len;
 
-	const char *mkd = luaL_checkstring(L, 1);
+	const char *mkd = luaL_checklstring(L, 1, &len);
 	const char *rndr = luaL_optstring(L, 2, "html");
 	const char *ext  = luaL_optstring(L, 3, "markdown");
 
@@ -54,10 +55,7 @@ static int l_markdown(lua_State *L)
 		prndr = &hrndr;
 
 	ib = bufnew(INPUT_UNIT);
-	bufgrow(ib, strlen(mkd) + 1);
-
-	ib->size = strlen(mkd);
-	strncpy(ib->data, mkd, ib->size);
+	bufput(ib, mkd, len);
 
 	ob = bufnew(OUTPUT_UNIT);
 	markdown(ob, ib, *prndr);
