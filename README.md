@@ -6,6 +6,8 @@ A simple lua binding to
 library that can parse
 [Markdown](http://daringfireball.net/projects/markdown/).
 
+Project moved to sourcehut: https://git.sr.ht/~jturner/luasoldout
+
 Usage
 -----
 
